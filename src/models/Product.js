@@ -1,3 +1,4 @@
+//modelo de produto para o catálogo, com campos dinâmicos para atributos personalizados
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({

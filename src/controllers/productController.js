@@ -1,3 +1,4 @@
+//controlador de produtos, com operações CRUD e associação ao usuário criador
 const Product = require('../models/Product');
 
 exports.create = async (req, res) => {

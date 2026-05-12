@@ -1,3 +1,4 @@
+//middleware de autenticação, verificando o token JWT e associando o usuário à requisição
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
