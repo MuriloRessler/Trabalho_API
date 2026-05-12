@@ -10,7 +10,14 @@ connectDB();
 
 // Middlewares globais
 app.use(express.json());
-app.use(mongoSanitize()); // 🛡️ Proteção contra NoSQL Injection
+
+// 🛡️ Proteção contra NoSQL Injection (versão corrigida)
+app.use((req, res, next) => {
+  if (req.body) mongoSanitize.sanitize(req.body);
+  if (req.params) mongoSanitize.sanitize(req.params);
+  if (req.query) mongoSanitize.sanitize(req.query);
+  next();
+});
 
 // Rotas
 app.use('/api/auth', require('./src/routes/authRoutes'));
