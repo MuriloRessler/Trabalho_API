@@ -1,114 +1,214 @@
-Catálogo de Produtos — API REST
+# 🚀 Trabalho_API - Catálogo de Produtos REST API
 
-API RESTful desenvolvida com Node.js, Express e MongoDB, com autenticação JWT e proteção contra NoSQL Injection.
+![Node.js](https://img.shields.io/badge/Node.js-v18+-green)
+![Express](https://img.shields.io/badge/Express-4.x-blue)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-success)
+![JWT](https://img.shields.io/badge/Auth-JWT-orange)
+![Swagger](https://img.shields.io/badge/Docs-Swagger-brightgreen)
 
----
-
-Tecnologias Utilizadas
-
-Node.js — Ambiente de execução JavaScript
-Express — Framework para criação da API
-MongoDB — Banco de dados NoSQL
-Mongoose — ODM para modelagem de dados
-bcryptjs — Criptografia de senhas
-jsonwebtoken — Autenticação via JWT
-express-mongo-sanitize — Proteção contra NoSQL Injection
-dotenv — Gerenciamento de variáveis de ambiente
+API RESTful desenvolvida com **Node.js**, **Express** e **MongoDB** para gerenciamento de produtos, utilizando autenticação via **JWT**, proteção contra **NoSQL Injection** e documentação interativa com **Swagger**.
 
 ---
 
-Estrutura do Projeto
+## 📖 Sobre o Projeto
 
-```
+O sistema permite que usuários se registrem e realizem login para acessar uma área protegida de gerenciamento de produtos.
+
+Cada produto possui informações como:
+
+* Nome
+* Descrição
+* Preço
+* Categoria
+* Estoque
+* Atributos personalizados
+
+A API segue os princípios REST e utiliza autenticação baseada em tokens JWT para proteger os endpoints de produtos.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### Back-end
+
+* Node.js
+* Express.js
+
+### Banco de Dados
+
+* MongoDB
+* Mongoose
+
+### Segurança
+
+* JWT (JSON Web Token)
+* bcryptjs
+* express-mongo-sanitize
+
+### Documentação
+
+* Swagger UI
+
+### Utilitários
+
+* dotenv
+* nodemon
+
+---
+
+## 📂 Estrutura do Projeto
+
+```text
 src/
 ├── config/
-│   └── database.js          # Conexão com o MongoDB
+│   └── database.js
+│
 ├── controllers/
-│   ├── authController.js    # Lógica de Registro e Login
-│   └── productController.js # Lógica do CRUD de Produtos
+│   ├── authController.js
+│   └── productController.js
+│
 ├── middleware/
-│   └── auth.js              # Verificação do token JWT
+│   ├── auth.js
+│   └── santize.js
+│
 ├── models/
-│   ├── User.js              # Schema de Usuário
-│   └── Product.js           # Schema de Produto
-└── routes/
-    ├── authRoutes.js        # Rotas de autenticação
-    └── productRoutes.js     # Rotas de produtos
-server.js                    # Entrada da aplicação
+│   ├── User.js
+│   └── Product.js
+│
+├── routes/
+│   ├── authRoutes.js
+│   └── productRoutes.js
+│
+├── swagger/
+│   └── swagger.js
+│
+server.js
 ```
 
 ---
 
-Como Rodar o Projeto
+## ✨ Funcionalidades
 
-Pré-requisitos
+### Usuários
 
-[Node.js](https://nodejs.org) (v18 ou superior)
-[MongoDB](https://www.mongodb.com) rodando localmente ou conta no [MongoDB Atlas](https://www.mongodb.com/atlas)
-[Git](https://git-scm.com)
+* [x] Cadastro de usuários
+* [x] Login com JWT
+* [x] Criptografia de senhas com bcrypt
 
-1. Clone o repositório
+### Produtos
+
+* [x] Criar produto
+* [x] Listar produtos
+* [x] Buscar produto por ID
+* [x] Atualizar produto
+* [x] Excluir produto
+
+### Segurança
+
+* [x] Rotas protegidas por JWT
+* [x] Proteção contra NoSQL Injection
+* [x] Senhas armazenadas de forma criptografada
+
+### Documentação
+
+* [x] Swagger UI integrado
+* [x] Teste de endpoints diretamente pelo navegador
+
+---
+
+## 📦 Instalação
+
+### Pré-requisitos
+
+* Git
+* Node.js 18+
+* MongoDB Atlas ou MongoDB Local
+
+---
+
+### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/MuriloRessler/Trabalho_API
 ```
 
-2. Instale as dependências
+### 2. Acesse a pasta
+
+```bash
+cd Trabalho_API
+```
+
+### 3. Instale as dependências
 
 ```bash
 npm install
 ```
 
-3. Configure as variáveis de ambiente
+---
 
-Copie o arquivo de exemplo e preencha com seus dados:
+## 🔑 Configuração das Variáveis de Ambiente
 
-```bash
-cp .env.example .env
-```
-
-Edite o `.env` com suas configurações:
+Crie um arquivo `.env` na raiz do projeto:
 
 ```env
 PORT=3000
-MONGODB_URI=mongodb://localhost:27017/catalogo_produtos
-JWT_SECRET=sua_chave_secreta_aqui
+
+MONGODB_URI=mongodb+srv://usuario:senha@cluster.mongodb.net/database
+
+JWT_SECRET=sua_chave_secreta
+
+JWT_EXPIRES_IN=7d
 ```
 
-4. Inicie o servidor
+---
+
+## 🚀 Executando a Aplicação
+
+### Desenvolvimento
 
 ```bash
-# Desenvolvimento (com hot reload)
 npm run dev
+```
 
-# Produção
+### Produção
+
+```bash
 npm start
 ```
 
-O servidor estará disponível em: `http://localhost:3000`
+Servidor disponível em:
+
+```text
+http://localhost:3000
+```
 
 ---
 
-Variáveis de Ambiente
+## 📖 Documentação Swagger
 
-| Variável | Descrição | Exemplo |
-|----------|-----------|---------|
-| PORT | Porta do servidor | 3000 |
-| MONGODB_URI | String de conexão do MongoDB | mongodb://localhost:27017/catalogo_produtos |
-| JWT_SECRET | Chave secreta para geração de tokens JWT | minha_chave_super_secreta |
+Após iniciar o servidor, acesse:
 
-> Nunca exponha o arquivo .env o repositório. Ele está listado no .gitignore.
+```text
+http://localhost:3000/api-docs
+```
+
+A documentação permite:
+
+* Visualizar todos os endpoints
+* Testar requisições
+* Informar token JWT diretamente pela interface
+* Ver exemplos de request e response
 
 ---
 
-Endpoints da API
+## 🔐 Autenticação
 
-Autenticação
+### Registrar Usuário
 
-POST /api/auth/register — Registrar usuário
+```http
+POST /api/auth/register
+```
 
-Body (JSON):
 ```json
 {
   "name": "João Silva",
@@ -117,23 +217,14 @@ Body (JSON):
 }
 ```
 
-Resposta (201):
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "664f1a2b3c4d5e6f7a8b9c0d",
-    "name": "João Silva",
-    "email": "joao@email.com"
-  }
-}
-```
-
 ---
 
-`POST /api/auth/login` — Fazer login
+### Login
 
-Body (JSON):
+```http
+POST /api/auth/login
+```
+
 ```json
 {
   "email": "joao@email.com",
@@ -141,128 +232,109 @@ Body (JSON):
 }
 ```
 
-Resposta (200):
+Resposta:
+
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": {
-    "id": "664f1a2b3c4d5e6f7a8b9c0d",
-    "name": "João Silva",
-    "email": "joao@email.com"
-  }
+  "token": "jwt_token"
 }
 ```
 
 ---
 
-Produtos
+## 📋 Endpoints
 
-> Todas as rotas de produtos exigem autenticação.  
-> Adicione o header: `Authorization: Bearer SEU_TOKEN`
+### Autenticação
+
+| Método | Endpoint           |
+| ------ | ------------------ |
+| POST   | /api/auth/register |
+| POST   | /api/auth/login    |
 
 ---
 
-POST /api/products — Criar produto
+### Produtos (JWT Obrigatório)
 
-Body (JSON):
+| Método | Endpoint          | Descrição         |
+| ------ | ----------------- | ----------------- |
+| POST   | /api/products     | Criar produto     |
+| GET    | /api/products     | Listar produtos   |
+| GET    | /api/products/:id | Buscar produto    |
+| PUT    | /api/products/:id | Atualizar produto |
+| DELETE | /api/products/:id | Excluir produto   |
+
+---
+
+## 🧪 Exemplo de Produto
+
 ```json
 {
-  "name": "Notebook Dell",
-  "description": "Notebook para uso profissional",
-  "price": 3500,
+  "name": "Notebook Gamer",
+  "description": "Notebook com placa de vídeo dedicada",
+  "price": 4999.99,
   "category": "eletronicos",
   "stock": 10,
   "attributes": {
-    "cor": "prata",
+    "ram": "16GB",
     "processador": "Intel i7"
   }
 }
 ```
 
-Resposta (201):Objeto do produto criado.
-
 ---
 
-GET /api/products — Listar todos os produtos
+## 🛡️ Segurança Implementada
 
-Resposta (200): Array com todos os produtos cadastrados.
+### JWT
 
----
+Todas as rotas de produtos exigem autenticação.
 
-GET /api/products/:id — Buscar produto por ID
+Exemplo:
 
-Parâmetro: id — ID do produto no MongoDB
-
-Resposta (200): Objeto do produto encontrado.
-
----
-
-PUT /api/products/:id — Atualizar produto
-
-Body (JSON): Campos que deseja atualizar.
-```json
-{
-  "price": 3200,
-  "stock": 8
-}
+```http
+Authorization: Bearer seu_token_jwt
 ```
 
-Resposta (200): Objeto do produto atualizado.
+### Proteção contra NoSQL Injection
 
----
+A aplicação utiliza:
 
-DELETE /api/products/:id — Deletar produto
-
-Resposta (200):
-```json
-{
-  "message": "Produto deletado com sucesso."
-}
+```javascript
+express-mongo-sanitize
 ```
 
----
-
-Segurança
-
-Senhas criptografadas com bcryptjs (salt rounds: 12)
-Autenticação via JWT com expiração de 7 dias
-Proteção contra NoSQL Injection com express-mongo-sanitize
-Validações obrigatórias nos Schemas do Mongoose
+para impedir manipulações maliciosas em consultas MongoDB.
 
 ---
 
-GitFlow
+## 🎯 Objetivos Acadêmicos
 
-```
-main        → versão estável e pronta para produção
-develop     → integração de novas funcionalidades
-feature/*   → desenvolvimento de requisitos específicos
-```
+Este projeto foi desenvolvido para praticar:
 
-Exemplo de fluxo:
-```bash
-git checkout -b feature/crud-produtos
-# desenvolve...
-git checkout develop
-git merge feature/crud-produtos
-git checkout main
-git merge develop
-```
+* Desenvolvimento de APIs REST
+* Node.js
+* Express
+* MongoDB
+* Mongoose
+* JWT
+* Segurança em APIs
+* Middleware
+* Documentação com Swagger
 
 ---
 
-Padrão de Commits
+## 👨‍💻 Autor
 
-| Prefixo | Uso |
-|---------|-----|
-| `feat:` | Nova funcionalidade |
-| `fix:` | Correção de bug |
-| `docs:` | Documentação |
-| `chore:` | Configurações e dependências |
-| `refactor:` | Refatoração de código |
+**Murilo Ressler Garcez**
+
+Projeto desenvolvido para fins acadêmicos na disciplina de desenvolvimento back-end.
+
+GitHub:
+https://github.com/MuriloRessler
 
 ---
 
-Autor
+## 📄 Licença
 
-Desenvolvido por Murilo Ressler Garcez como trabalho prático da disciplina de Criação de Sites II.
+Este projeto possui finalidade exclusivamente educacional.
+
